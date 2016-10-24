@@ -30,6 +30,12 @@ public class GameBoard extends Board {
         addMouseListener(alien);
     }
 
+    @Override
+    protected void drawGameOver(Graphics g) {
+        this.centerText(g, "GAME OVER");
+    }
+
+
     /**
      * Spielfeld neu zeichnen. Wird vom Framework aufgerufen.
      */
@@ -37,6 +43,8 @@ public class GameBoard extends Board {
     public void drawGame(Graphics g) {
         // Alien zeichnen
         alien.draw(g, this);
+
+
     }
 
     /**

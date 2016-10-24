@@ -38,4 +38,8 @@ public class Alien extends AnimatedSprite {
                 new StripedImage("assets/explosion_1.png", 43)));
         setInvisibleAfterFrames(70);
     }
+
+    public void mousePressed(){
+        this.explode();
+    }
 }
