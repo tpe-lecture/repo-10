@@ -15,12 +15,11 @@ public class Untoter extends Wesen {
     private int stärke;
 
     public Untoter(String name){
-        super(name);
-        unterwasseratmung= STANDARD_UNTERWASSERATMUNG;
+        this(name, STANDARD_UNTERWASSERATMUNG);
     }
-    public Untoter(String name, int x){
-        this(name);
-        unterwasseratmung=x;
+    public Untoter(String name, int unterwasseratmung){
+        super(name);
+        this.unterwasseratmung= unterwasseratmung;
     }
 
     /**
