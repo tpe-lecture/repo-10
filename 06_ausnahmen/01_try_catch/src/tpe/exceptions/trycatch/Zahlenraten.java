@@ -31,7 +31,7 @@ public final class Zahlenraten {
      * @throws IOException I/O-Fehler
      */
     public static void main(String[] args)
-            throws NumberFormatException, IOException {
+         throws IOException {
 
         // zu ratende Zahl bestimmen
         int zahl = new Random().nextInt(100) + 1;
@@ -40,7 +40,20 @@ public final class Zahlenraten {
 
         while (true) {
             System.out.print("Bitte geben Sie eine Zahl ein: ");
-            int geraten  = Integer.parseInt(readNumber());
+
+            int geraten = 0;
+
+            try {
+
+                geraten = Integer.parseInt(readNumber());
+
+            }
+            catch (NumberFormatException ex) {
+
+                System.err.println("b");
+                continue;
+            }
+
             versuche++;
 
             if (geraten < zahl) {
@@ -53,6 +66,10 @@ public final class Zahlenraten {
                 System.out.printf("Richtig in %d Versuchen", versuche);
                 break;
             }
+
+
+
         }
+
     }
 }
