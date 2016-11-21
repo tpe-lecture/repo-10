@@ -1,11 +1,12 @@
 package tpe.enumeration.own;
-
 import java.util.Random;
+
 
 /**
  * Ein einfacher Würfel.
+ * 
  */
-public class Wuerfel {
+public class Wuerfel  {
 
     /** 4-seitiger Würfel. */
     public static final int D4 = 4;
@@ -20,7 +21,7 @@ public class Wuerfel {
     public static final int D10 = 10;
 
     /** 12-seitiger Würfel. */
-    public static final int D12 = 13;
+    public static final int D12 = 12;
 
     /** Zufallszahlengenerator. */
     private final Random rnd = new Random();
@@ -33,8 +34,8 @@ public class Wuerfel {
      *
      * @param numSides Anzahl der Seiten des Würfels.
      */
-    public Wuerfel(int numSides) {
-        this.numSides = numSides;
+    public Wuerfel(WuerfelTyp wuerfeltyp) {
+        numSides=wuerfeltyp.ordinal();
     }
 
     /**
