@@ -7,11 +7,61 @@ import java.awt.Point;
 import java.util.Random;
 
 import de.smits_net.games.framework.board.Board;
+import de.smits_net.games.framework.image.AnimatedImage;
+import de.smits_net.games.framework.image.ImagePack;
+import de.smits_net.games.framework.image.StripedImage;
+import de.smits_net.games.framework.sprite.AnimatedSprite;
+import de.smits_net.games.framework.sprite.Direction;
+import de.smits_net.games.framework.sprite.Sprite.BoundaryPolicy;
 
 /**
  * Spielfeld.
  */
 public class GameBoard extends Board {
+
+    /**
+     *
+     * @author s.abdi
+     * @param
+     *
+     * @return
+     *
+     */
+    public class Alien extends AnimatedSprite {
+
+
+        private static final int ALIEN_SPEED = 2;
+        /**
+         *
+         * @param board
+         * @param startPoint
+         */
+        public Alien() {
+          super(GameBoard.this, new Point(800, 50 + new Random().nextInt(100)),
+                    BoundaryPolicy.JUMP_BACK,
+                    new AnimatedImage(50,
+                        new ImagePack("assets", "ship01", "ship02", "ship03")));
+            velocity.setVelocity(Direction.WEST, ALIEN_SPEED);
+            addMouseListener(this);
+        }
+        /**
+         *
+         */
+        public void explode() {
+            setActive(false);
+            setImages(new AnimatedImage(20,
+                    new StripedImage("assets/explosion_1.png", 43)));
+            setInvisibleAfterFrames(70);
+        }
+        /**
+         *
+         */
+        public void mousePressed() {
+            explode();
+        }
+
+
+    }
 
     /** Alien, das durch das Bild läuft. */
     private Alien alien;
@@ -24,10 +74,10 @@ public class GameBoard extends Board {
         super(10, new Dimension(800, 300), Color.BLACK);
 
         // Alien initialisieren
-        alien = new Alien(this, new Point(800, 50 + new Random().nextInt(100)));
+        alien = new Alien();
 
         // Alien soll auf Maus-Klicks reagieren
-        addMouseListener(alien);
+//        addMouseListener(alien);
     }
 
     /**
