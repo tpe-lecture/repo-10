@@ -1,17 +1,28 @@
 package tpe.testate.crypter;
 
+/**
+ * Klasse, die eine eingegebene Zeichenkette mithilfe eines 
+ * Codebaumes ver-/entschlüsselt.
+ * 
+ * @author 1615141
+ */
 public class CrypterImpl implements Crypter {
 
 
-
+	/**
+	 * Eingegebener Text wird verschlüsselt.
+	 * 
+	 * @param input Text der verschlüsselt werden soll.
+	 * @return verschlüsselter Text.
+	 */
 	@Override
 	public String encrypt(String input) {
 		String cryptedText = "";
-		String text= "";
-		text=input.toLowerCase();
-		char[] array= text.toCharArray();
-		for(int i =0; i<input.length();i++){
-			if(array[i]>=48&&array[i]<=57 || (array[i]<=127 || array[i]==32)){
+		char[] array = (input.toLowerCase()).toCharArray();
+		for (int i = 0; i < array.length; i++) {
+			if ((array[i] >= '0' && array[i] <= '9') || 
+			    (array[i] >= 'a' && array[i] <= 'z') || 
+			     array[i] == ' ') {
 				switch(array[i]){
 				case 'e': { cryptedText=cryptedText+'3'; break;}
 				case '3': { cryptedText=cryptedText+'3'; break;}
@@ -26,23 +37,31 @@ public class CrypterImpl implements Crypter {
 				default :  { cryptedText= cryptedText+array[i]; break;}
 				}
 			}
-		else{
-			throw new IllegalArgumentException();
-			}
 		}
 		return cryptedText;
 	}
-
+	
+	/**
+	 * Eingegebener Text wird verschlüsselt.
+	 * 
+	 * @param input Text der entschlüsselt werden soll.
+	 * @return entschlüsselter Text.
+	 * @throws IllegalArgumentException wird geworfen, wenn die Eingabe
+     *         ungültige Zeichen (Großbuchstaben) enthält.
+	 */
 	@Override
-	public String decrypt(String input) throws IllegalArgumentException {
-
-		for(int i=0; i<input.length();i++){
-			if(Character.isUpperCase(input.charAt(i)) );
-			throw new IllegalArgumentException();
+	 public String decrypt(String input) throws IllegalArgumentException {
+		    for (int i = 0; i < input.length(); i++) {
+		      if (Character.isUpperCase(input.charAt(i))) {
+		        throw new IllegalArgumentException();
+		      }
+		      if (!((input.charAt(i) >= 'a' && input.charAt(i) <= 'z') 
+		          || input.charAt(i) >= '0' && input.charAt(i) <= '9' 
+		          || input.charAt(i) == ' ')) {
+		        throw new IllegalArgumentException();
+		      }
+		    }
+		    return encrypt(input);
 		}
-
-
-		return encrypt(input);
-}
-
+		
 }
